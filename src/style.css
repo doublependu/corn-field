@@ -1,0 +1,168 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  background: #2a2210;
+  font-family: Georgia, 'Iowan Old Style', serif;
+}
+canvas { display: block; }
+
+#vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0) 42%, rgba(45, 28, 6, 0.42) 100%);
+}
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: radial-gradient(ellipse at center, #57421c 0%, #1d1608 100%);
+  color: #f7ebcb;
+  text-align: center;
+  padding: 24px;
+  box-sizing: border-box;
+  transition: opacity 1.6s ease;
+}
+#overlay h1 {
+  font-weight: 400;
+  font-size: 2.2em;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.35em;
+}
+#overlay p {
+  font-size: 1.05em;
+  color: #dcc99c;
+  max-width: 430px;
+  line-height: 1.6;
+  margin: 0 0 1.8em;
+}
+#enterBtn {
+  padding: 0.85em 2em;
+  font-size: 1.05em;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+  background: #cfa04a;
+  color: #3a2a10;
+  border: none;
+  border-radius: 32px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(207, 160, 74, 0.38);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#enterBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 26px rgba(207, 160, 74, 0.55);
+}
+#enterBtn:focus-visible {
+  outline: 2px solid #f7ebcb;
+  outline-offset: 3px;
+}
+.fadeOut {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#hud {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 18px 22px;
+  box-sizing: border-box;
+  pointer-events: none;
+  color: #f7ebcb;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+}
+#hud .kernels { font-size: 0.95em; opacity: 0.85; }
+#hud .hint {
+  font-size: 0.82em;
+  opacity: 0.55;
+  text-align: right;
+  line-height: 1.5;
+}
+
+#toast {
+  position: fixed;
+  top: 13%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fcf0cd;
+  font-size: 1.15em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  transition: opacity 1.8s ease;
+  pointer-events: none;
+  z-index: 6;
+  text-align: center;
+  max-width: 80%;
+  line-height: 1.5;
+}
+
+/* What you see on the way through a door. Sits under the vignette and over
+   everything else, and is the only full-screen thing in the piece that is not
+   the opening overlay — the field going out is meant to feel like the field
+   going out, not like a loading screen. */
+#portalFade {
+  position: fixed;
+  inset: 0;
+  z-index: 7;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.25s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0dcff;
+  font-size: 1.5em;
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
+}
+#portalFade.on { opacity: 1; }
+#portalFade .dest {
+  opacity: 0;
+  transition: opacity 0.9s ease 0.5s;
+}
+#portalFade.on .dest { opacity: 0.9; }
+
+#soundToggle, #newMazeBtn {
+  position: fixed;
+  top: 18px;
+  z-index: 6;
+  background: rgba(32, 24, 8, 0.42);
+  border: 1px solid rgba(247, 235, 203, 0.32);
+  color: #f7ebcb;
+  border-radius: 20px;
+  padding: 7px 15px;
+  font-family: inherit;
+  font-size: 0.8em;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+#soundToggle { right: 18px; }
+
+/* Quieter than the sound toggle it sits beside, because it throws the field
+   away and nothing that does that should be the brightest thing on screen. */
+#newMazeBtn {
+  right: 140px;
+  opacity: 0.62;
+  transition: opacity 0.25s ease;
+}
+#newMazeBtn:hover { opacity: 1; }
+
+#soundToggle:focus-visible, #newMazeBtn:focus-visible {
+  outline: 2px solid #f7ebcb;
+  outline-offset: 2px;
+}
