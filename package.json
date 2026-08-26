@@ -6,10 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:cf": "vite build --base=/",
+    "deploy": "npm run build:cf && wrangler deploy",
+    "preview:cf": "npm run build:cf && wrangler dev"
   },
   "devDependencies": {
-    "vite": "^8.2.0"
+    "vite": "^8.2.0",
+    "wrangler": "^4.126.0"
   },
   "dependencies": {
     "three": "^0.185.1"

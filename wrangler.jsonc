@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "corn-field",
+  "compatibility_date": "2026-08-26",
+
+  // A static-assets-only Worker: no server code, just the built field.
+  // `directory` is what `npm run build:cf` writes.
+  "assets": {
+    "directory": "./dist",
+    // The piece is one page; anything else is genuinely not here.
+    "not_found_handling": "404-page"
+  }
+}
