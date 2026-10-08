@@ -9,5 +9,9 @@
     "directory": "./dist",
     // The piece is one page; anything else is genuinely not here.
     "not_found_handling": "404-page"
-  }
+  }, 
+  "observability": {
+    "enabled": true
+  },
+  "preview_urls": false
 }
